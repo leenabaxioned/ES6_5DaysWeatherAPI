@@ -1,41 +1,130 @@
-<!doctype html>
+<!DOCTYPE html>
 <!-- If multi-language site, reconsider usage of html lang declaration here. -->
-<html lang="en"> 
-
-<head>
-  <meta charset="utf-8">
-  <title>Client</title>
-  <!-- View-port Basics: http://mzl.la/VYREaP -->
-  <!-- This meta tag is used for mobile device to display the page without any zooming,
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Client</title>
+    <!-- View-port Basics: http://mzl.la/VYREaP -->
+    <!-- This meta tag is used for mobile device to display the page without any zooming,
        so how much the device is able to fit on the screen is what's shown initially. 
        Remove comments from this tag, when you want to apply media queries to the website. -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <!-- Place favicon.ico in the root directory: mathiasbynens.be/notes/touch-icons -->
-  <link rel="shortcut icon" href="favicon.ico" />
-  <!--font-awesome link for icons-->
-  <link rel="stylesheet" media="screen" href="assets/vendor/font-awesome/css/all.min.css" >
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- Default style-sheet is for 'media' type screen (color computer display).  -->
-  <link rel="stylesheet" media="screen" href="assets/css/style.css" >
-</head>
-
-<body>
-  <!--container start-->
-  <div class="container">
-    <!--header section start-->
-    <header>
-    </header>
-    <!--header section start-->
-    <!--main section start-->
-    <main>
-    </main>
-    <!--main section end-->
-    <!--footer section start-->
-    <footer>      
-    </footer>
-    <!--footer section end-->
-  </div>
-  <!--container end-->
-  <script src="assets/js/script.js"></script>
-</body>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <!-- Place favicon.ico in the root directory: mathiasbynens.be/notes/touch-icons -->
+    <link rel="shortcut icon" href="favicon.ico" />
+    <!--font-awesome link for icons-->
+    <link
+      rel="stylesheet"
+      media="screen"
+      href="assets/vendor/font-awesome/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- Default style-sheet is for 'media' type screen (color computer display).  -->
+    <link rel="stylesheet" media="screen" href="assets/css/style.css" />
+  </head>
+  <body onload="DefaultScreen()">
+    <!--container start-->
+    <div class="container">
+      <!--header section start-->
+      <header></header>
+      <!--header section start-->
+      <!--main section start-->
+      <main>
+        <section class="main">
+          <div class="wrapper">
+            <div class="main-intro">
+              <h1 id="Para1">5 Days Weather Forecast</h1>
+              <form>
+                <label id="inputContainer">
+                  City: <input type="text" id="cityInput" />
+                </label>
+              </form>
+              <button type="button" class="clickme">Click Me</button>
+              <h2 id="cityName">City</h2>
+            </div>
+            <div id="weatherContainer">
+              <div id="iconsContainer">
+                <div class="icons">
+                  <p class="dates" id="day1date">Loading...</p>
+                  <p class="Climate" id="day1Climate">Loading...</p>
+                  <div class="image">
+                    <img
+                      src="https://placehold.co/100x100/EEE/31343C"
+                      class="imgClass"
+                      id="img1"
+                    />
+                  </div>
+                  <p class="Temperature" id="day1Temperature">Loading...</p>
+                  <p class="windspeed" id="day1"></p>
+                </div>
+                <div class="icons">
+                  <p class="dates" id="day2date">Loading...</p>
+                  <p class="Climate" id="day2Climate">Loading...</p>
+                  <div class="image">
+                    <img
+                      src="https://placehold.co/100x100/EEE/31343C"
+                      class="imgClass"
+                      id="img2"
+                    />
+                  </div>
+                  <p class="Temperature" id="day2Temperature">Loading...</p>
+                  <p class="windspeed" id="day2"></p>
+                </div>
+                <div class="icons">
+                  <p class="dates" id="day3date">Loading...</p>
+                  <p class="Climate" id="day3Climate">Loading...</p>
+                  <div class="image">
+                    <img
+                      src="https://placehold.co/100x100/EEE/31343C"
+                      class="imgClass"
+                      id="img3"
+                    />
+                  </div>
+                  <p class="Temperature" id="day3Temperature">Loading...</p>
+                  <p class="windspeed" id="day3"></p>
+                </div>
+                <div class="icons">
+                  <p class="dates" id="day4date">Loading...</p>
+                  <p class="Climate" id="day4Climate">Loading...</p>
+                  <div class="image">
+                    <img
+                      src="https://placehold.co/100x100/EEE/31343C"
+                      class="imgClass"
+                      id="img4"
+                    />
+                  </div>
+                  <p class="Temperature" id="day4Temperature">Loading...</p>
+                  <p class="windspeed" id="day4"></p>
+                </div>
+                <div class="icons">
+                  <p class="dates" id="day5date">Loading...</p>
+                  <p class="Climate" id="day5Climate">Loading...</p>
+                  <div class="image">
+                    <img
+                      src="https://placehold.co/100x100/EEE/31343C"
+                      class="imgClass"
+                      id="img5"
+                    />
+                  </div>
+                  <p class="Temperature" id="day5Temperature">Loading...</p>
+                  <p class="windspeed" id="day5"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <!--main section end-->
+      <!--footer section start-->
+      <footer></footer>
+      <!--footer section end-->
+    </div>
+    <!--container end-->
+    <script src="assets/js/script.js"></script>
+  </body>
 </html>
