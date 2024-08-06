@@ -14,33 +14,14 @@ fetch('https://api.openweathermap.org/data/2.5/forecast?q='+newName.value+'&appi
 .then(response => response.json())
 .then(data => {
 
-    // for(i = 0; i<5; i++){
-    //     document.getElementById("day" + (i+1) + "date").innerHTML = data.list[i].dt_txt;
-    // }
-
-    //Getting the min and max values for each day
     for(i = 0; i<5; i++){
         document.getElementById("day" + (i+1) + "Temperature").innerHTML = "Temperature: " + Number(data.list[i].main.temp - 273.15).toFixed(1) + "°";
-        //Number(1.3450001).toFixed(2); // 1.35
-    }
-
-    for(i = 0; i<5; i++){
         document.getElementById("day" + (i+1) + "Climate").innerHTML = "Climate: " + data.list[i].weather[0].description;
-    }
-
-    for(i = 0; i<5; i++){
         document.getElementById("day" + (i+1)).innerHTML = "Wind Speed: " + data.list[i].wind.speed + "km/h";
-    }
-    //------------------------------------------------------------
-
-    //Getting Weather Icons
-     for(i = 0; i<5; i++){
         document.getElementById("img" + (i+1)).src = "http://openweathermap.org/img/wn/"+
         data.list[i].weather[0].icon
         +".png";
     }
-    //------------------------------------------------------------
-    console.log(data)
 })
 
 .catch(err => alert("Something Went Wrong: Try Checking Your Internet Coneciton"))
