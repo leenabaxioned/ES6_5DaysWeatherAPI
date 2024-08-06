@@ -1,53 +1,59 @@
-/* Author: */
-const clickbtn = document.querySelector(".clickme");
-clickbtn.addEventListener("click",() => {
+document.querySelector(".clickme").addEventListener("click", () => {
     GetInfo();
-})
+});
 
 function GetInfo() {
+    const cityInput = document.querySelector("#cityInput").value;
+    const cityName = document.querySelector("#cityName");
+    cityName.innerHTML = cityInput;
 
-    var newName = document.getElementById("cityInput");
-    var cityName = document.getElementById("cityName");
-    cityName.innerHTML = newName.value;
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityInput}&appid=879fcd7a229d308d37f2d6f92cde5fbf`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const weatherContainer = document.querySelector("#weatherContainer");
+            weatherContainer.innerHTML = "";
 
-fetch('https://api.openweathermap.org/data/2.5/forecast?q='+newName.value+'&appid=879fcd7a229d308d37f2d6f92cde5fbf')
-.then(response => response.json())
-.then(data => {
+            // Filter the data to get the first forecast for each day
+            const dayData = data.list.filter((item, index) => index % 8 === 0);
 
-    for(i = 0; i<5; i++){
-        document.getElementById("day" + (i+1) + "Temperature").innerHTML = "Temperature: " + Number(data.list[i].main.temp - 273.15).toFixed(1) + "°";
-        document.getElementById("day" + (i+1) + "Climate").innerHTML = "Climate: " + data.list[i].weather[0].description;
-        document.getElementById("day" + (i+1)).innerHTML = "Wind Speed: " + data.list[i].wind.speed + "km/h";
-        document.getElementById("img" + (i+1)).src = "http://openweathermap.org/img/wn/"+
-        data.list[i].weather[0].icon
-        +".png";
-    }
-})
-
-.catch(err => alert("Something Went Wrong: Try Checking Your Internet Coneciton"))
+            for (let i = 0; i < 5; i++) {
+                const dayCard = createWeatherCard(i + 1, dayData[i]);
+                weatherContainer.appendChild(dayCard);
+            }
+        })
+        .catch(err => {
+            if(cityInput == "" || !cityInput.value){
+            document.querySelector("#error-message").innerHTML = `You have entered wrong city name`;
+            }
+        });
 }
 
-function DefaultScreen(){
-    document.getElementById("cityInput").defaultValue = "Mumbai";
-    GetInfo();
+function createWeatherCard(day, dayData) {
+    const card = document.createElement("div");
+    card.classList.add("icons");
+
+    const date = new Date(dayData.dt * 1000); // Convert UNIX timestamp to Date object
+    const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`; // Format the date
+
+    card.innerHTML = `
+        <p class="dates" id="day${day}date">${formattedDate}</p>
+        <p class="Climate" id="day${day}Climate">Loading...</p>
+        <div class="image">
+            <img src="https://placehold.co/100x100/EEE/31343C" class="imgClass" id="img${day}" />
+        </div>
+        <p class="Temperature" id="day${day}Temperature">Loading...</p>
+        <p class="windspeed" id="day${day}"></p>
+    `;
+
+    card.querySelector(`#day${day}Climate`).innerHTML = `Climate: ${dayData.weather[0].description}`;
+    card.querySelector(`#day${day}Temperature`).innerHTML = `Temperature: ${Number(dayData.main.temp - 273.15).toFixed(1)}°C`;
+    card.querySelector(`#day${day}`).innerHTML = `Wind Speed: ${dayData.wind.speed} km/h`;
+    card.querySelector(`#img${day}`).src = `http://openweathermap.org/img/wn/${dayData.weather[0].icon}.png`;
+
+    return card;
 }
-
-
-//Getting and displaying the text for the upcoming five days of the week
-var d = new Date();
-var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",];
-
-//Function to get the correct integer for the index of the days array
-function CheckDay(day){
-    if(day + d.getDay() > 6){
-        return day + d.getDay() - 7;
-    }
-    else{
-        return day + d.getDay();
-    }
-}
-
-    for(i = 0; i<5; i++){
-        document.getElementById("day" + (i+1) + "date").innerHTML = weekday[CheckDay(i)];
-    }
-    //------------------------------------------------------------
